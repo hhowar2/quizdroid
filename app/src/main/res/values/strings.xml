@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">quizdroid</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_topic_overview">TopicOverview</string>
+    <string name="title_activity_quizz">Quizz</string>
+    <string name="title_activity_answer">AnswerActivity</string>
+</resources>
