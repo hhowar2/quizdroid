@@ -38,7 +38,8 @@ public class TopicSelection extends ActionBarActivity {
                 int itemPosition = position;
                 String itemValue = (String)listView.getItemAtPosition(position);
                 Log.i("Topic Selected", itemValue);
-                Intent next = new Intent(TopicSelection.this, TopicOverview.class);
+                //Intent next = new Intent(TopicSelection.this, TopicOverview.class);
+                Intent next = new Intent(TopicSelection.this, MultiuseActivity.class);
                 next.putExtra("Topic", itemValue);
                 startActivity(next);
                 /*Toast.makeText(getApplicationContext(), "Position:" + itemPosition + " ListItem" + itemValue, Toast.LENGTH_LONG)

@@ -6,4 +6,8 @@
     <string name="title_activity_topic_overview">TopicOverview</string>
     <string name="title_activity_quizz">Quizz</string>
     <string name="title_activity_answer">AnswerActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_multiuse">MultiuseActivity</string>
 </resources>
