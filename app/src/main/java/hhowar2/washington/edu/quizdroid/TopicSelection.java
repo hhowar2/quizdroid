@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import java.util.List;
+
 
 public class TopicSelection extends ActionBarActivity {
 
@@ -25,9 +27,13 @@ public class TopicSelection extends ActionBarActivity {
         setContentView(R.layout.activity_topic_selection);
 
         listView = (ListView)findViewById(R.id.listView);
-        String[] values = new String[] {
-                "Math", "Physics", "Marvel Super Heroes", "Science Fiction"
-        };
+        QuizApp data = (QuizApp)getApplication();
+
+        List<Topic> TopicList = data.TopicList;
+        String[] values = new String[TopicList.size()];
+        for(int i = 0; i < TopicList.size(); i++ ) {
+            values[i] = TopicList.get(i).getName();
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 

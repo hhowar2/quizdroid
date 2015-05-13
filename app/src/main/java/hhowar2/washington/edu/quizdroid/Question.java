@@ -5,18 +5,20 @@ package hhowar2.washington.edu.quizdroid;
  */
 public class Question {
     private String question;
-    private String answer;
+    private String[] answer;
+    private int index;
 
-    public Question(String question, String answer) {
+    public Question(String question, String[] answer, int index) {
         this.question = question;
         this.answer = answer;
+        this.index = index;
     }
 
     public void setQuestion(String question) {
         this.question = question;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(String[] answer) {
         this.answer = answer;
     }
 
@@ -24,7 +26,10 @@ public class Question {
         return this.question;
     }
 
-    public String getAnswer() {
+    public String[] getAnswers() {
         return this.answer;
+    }
+    public String getCorrectAnswer() {
+        return this.answer[index];
     }
 }

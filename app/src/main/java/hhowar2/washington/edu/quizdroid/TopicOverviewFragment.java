@@ -1,7 +1,6 @@
 package hhowar2.washington.edu.quizdroid;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ public class TopicOverviewFragment extends Fragment {
     private Button mButton;
     private TextView title;
     private String topic;
-
+    Topic topicChosen;
     List<Question> questions;
     String description;
 
@@ -81,20 +79,29 @@ public class TopicOverviewFragment extends Fragment {
         Bundle extras = this.getArguments();
         //if(extras != null) {
             topic = extras.getString("Topic");
+        QuizApp data = (QuizApp)getActivity().getApplication();
+        for(int i = 0; i <data.TopicList.size(); i++) {
+            String title = data.TopicList.get(i).getName();
+            if(topic.equals(title)) {
+                topicChosen = data.TopicList.get(i);
+            }
+        }
         questions = new ArrayList<Question>();
-        if (topic.equals("Math")) {
-            questions = MultiuseActivity.Math.getQuestions();
-            description = MultiuseActivity.Math.getDescription();
+        /*if (topic.equals("Math")) {
+            questions = data.Math.getQuestions();
+            description = data.Math.getShortDescription();
          } else if (topic.equals("Physics")) {
-            questions = MultiuseActivity.Physics.getQuestions();
-            description = MultiuseActivity.Physics.getDescription();
+            questions = data.Physics.getQuestions();
+            description = data.Physics.getShortDescription();
          } else if (topic.equals("Marvel Super Heroes")) {
-            questions = MultiuseActivity.MarvelSuperHeroes.getQuestions();
-            description = MultiuseActivity.MarvelSuperHeroes.getDescription();
+            questions = data.MarvelSuperHeroes.getQuestions();
+            description = data.MarvelSuperHeroes.getShortDescription();
          } else if (topic.equals("Science Fiction")) {
-            questions = MultiuseActivity.ScienceFiction.getQuestions();
-            description = MultiuseActivity.ScienceFiction.getDescription();
-         }
+            questions = data.ScienceFiction.getQuestions();
+            description = data.ScienceFiction.getShortDescription();
+         }*/
+        questions = topicChosen.getQuestions();
+        description = topicChosen.getShortDescription();
 
         Log.i("test", topic);
         View view = null;

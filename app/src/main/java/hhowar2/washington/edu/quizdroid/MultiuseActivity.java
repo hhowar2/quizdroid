@@ -13,18 +13,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//Main activity that implements Quiz, Answer and Topic fragments
 public class MultiuseActivity extends ActionBarActivity implements TopicOverviewFragment.OnFragmentInteractionListener, QuizFragment.OnFragmentInteractionListener,
 AnswerFragment.OnFragmentInteractionListener {
 
-    static Topic Math;
+    /*static Topic Math;
     static Topic Physics;
     static Topic MarvelSuperHeroes;
     static Topic ScienceFiction;
 
-    List<Question> questions;
+    List<Question> questions;*/
     String topic;
     String description;
+
+    //QuizApp.Math;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,42 +34,8 @@ AnswerFragment.OnFragmentInteractionListener {
         setContentView(R.layout.activity_multiuse);
         Bundle extras = getIntent().getExtras();
         topic = extras.getString("Topic");
-        questions = new ArrayList<Question>();
-        //if(topic.equals("Math")) {
-            questions.add(new Question("1 + 1", "2"));
-            questions.add(new Question("2 + 1", "3"));
-            questions.add(new Question("3 + 1", "4"));
-            questions.add(new Question("4 + 1", "5"));
-            description = "The study of relationships and numbers";
-            Math = new Topic("Math", questions, description);
-        //} else if(topic.equals("Physics")) {
-        questions = new ArrayList<Question>();
+        QuizApp data = (QuizApp)getApplication();
 
-        questions.add(new Question("Gravity", "-9.8m/s^2"));
-            questions.add(new Question("F=", "ma"));
-            questions.add(new Question("e=", "mc^2"));
-            questions.add(new Question("p=", "MV"));
-            description = "Explaining real-world laws through math";
-            Physics = new Topic("Physics", questions, description);
-        //} else if(topic .equals("Marvel Super Heroes")) {
-        questions = new ArrayList<Question>();
-
-        questions.add(new Question("Spider Man's identity?", "Peter Parker"));
-            questions.add(new Question("Super Man's Identity", "Clark Kent"));
-            questions.add(new Question("Batman's Identity", "Bruce Wayne"));
-            questions.add(new Question("Flash's Identity ", "Barry Gordon"));
-            description = "The coolest kids you'll ever meet";
-            MarvelSuperHeroes = new Topic("Marvel Super Heroes", questions, description);
-        //} else if(topic.equals("Science Fiction")) {
-        questions = new ArrayList<Question>();
-
-        questions.add(new Question("Isaac Asimov wrote?", "IRobot"));
-            questions.add(new Question("Frank Herbert wrote?", "Dune"));
-            questions.add(new Question("Robert Heinlein wrote?", "Starship Trooper"));
-            questions.add(new Question("Terry Practchett wrote? ", "Discworld"));
-            description = "The genre that defines the future";
-            ScienceFiction = new Topic("Science Fiction", questions, description);
-        //}*/
         TopicOverviewFragment topicFragment = new TopicOverviewFragment();
         topicFragment.setArguments(extras);
         if(savedInstanceState == null) {
@@ -97,7 +65,7 @@ AnswerFragment.OnFragmentInteractionListener {
 
     }
 
-    public void answer(String topic, int correct, int incorrect, int number, String answer, String userAnswer) {
+    public void answer(String topic, int correct, int incorrect, int number, String answer, String userAnswer, int questionSize) {
         Bundle bundle = new Bundle();
         bundle.putString("Topic", topic);
         bundle.putInt("Number", number);
@@ -105,6 +73,7 @@ AnswerFragment.OnFragmentInteractionListener {
         bundle.putInt("Incorrect", incorrect);
         bundle.putString("Answer", answer);
         bundle.putString("UserAnswer", userAnswer);
+        bundle.putInt("QuestionSize", questionSize);
         FragmentManager fragmentManager = getFragmentManager();
         AnswerFragment answerFrag = new AnswerFragment();
         answerFrag.setArguments(bundle);

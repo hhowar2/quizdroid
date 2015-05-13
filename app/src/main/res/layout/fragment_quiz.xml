@@ -16,7 +16,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Submit"
         android:id="@+id/button5"
         android:layout_gravity="right|bottom" />
 
@@ -29,7 +29,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New RadioButton"
+            android:text="Submit"
             android:id="@+id/radioButton6"
 
              />

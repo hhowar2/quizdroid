@@ -8,16 +8,18 @@ import java.util.List;
 public class Topic {
     private String name;
     private List<Question> questions;
-    private String description;
+    private String shortDescription;
+    private String longDescription;
 
-    public Topic(String name, List<Question> questions, String description) {
+    public Topic(String name, List<Question> questions, String shortDescription, String longDescription) {
         this.name = name;
         this.questions = questions;
-        this.description = description;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getShortDescription() {
+        return this.shortDescription;
     }
     public void addQuestions(Question q) {
         questions.add(q);
@@ -30,4 +32,8 @@ public class Topic {
     public String getName() {
         return this.name;
     }
+    public String getLongDescription() {
+        return this.longDescription;
+    }
+
 }

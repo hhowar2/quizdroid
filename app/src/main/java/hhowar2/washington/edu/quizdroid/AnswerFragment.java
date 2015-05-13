@@ -27,6 +27,7 @@ public class AnswerFragment extends Fragment {
     int incorrect;
     int number;
     String topic;
+    int questionSize;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,6 +82,7 @@ public class AnswerFragment extends Fragment {
         answer = extras.getString("Answer");
         correct = extras.getInt("Correct");
         incorrect = extras.getInt("Incorrect");
+        questionSize = extras.getInt("QuestionSize");
         TextView text = (TextView) view.findViewById(R.id.textView11);
         text.setText("My Answer: " + useranswer);
         text = (TextView) view.findViewById(R.id.textView12);
@@ -88,7 +90,7 @@ public class AnswerFragment extends Fragment {
         text = (TextView) view.findViewById(R.id.textView13);
         text.setText(correct + " correct out of " + (incorrect + correct) + " questions");
         Button nextQuestion = (Button) view.findViewById(R.id.button6);
-        if(number < 4) {
+        if(number < questionSize) {
             nextQuestion.setText("Next");
         } else {
             nextQuestion.setText("Finish");
@@ -96,7 +98,7 @@ public class AnswerFragment extends Fragment {
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(number < 4) {
+                if(number < questionSize) {
                     mListener.nextQuestion(topic, number, correct, incorrect);
                 } else {
                     mListener.topicSelection();
