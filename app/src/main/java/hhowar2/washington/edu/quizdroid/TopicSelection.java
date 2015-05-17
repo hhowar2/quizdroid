@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.content.Intent;
 
 import java.util.List;
 
@@ -71,6 +72,9 @@ public class TopicSelection extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Log.i("Application", "setting button hit");
+            Intent i = new Intent(this, AppPreference.class);
+            startActivity(i);
             return true;
         }
 

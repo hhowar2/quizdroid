@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:title="URL"
+        android:key="URL"
+        android:defaultValue="http://tednewardsandbox.site44.com/questions.json"
+        android:summary="URL where questions will be downloaded" />
+    <EditTextPreference
+        android:title="Minutes"
+        android:key="Minutes"
+        android:defaultValue="10"
+        android:summary="Time required to check for downloads" />
+</PreferenceScreen>

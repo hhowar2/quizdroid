@@ -1,7 +1,14 @@
 package hhowar2.washington.edu.quizdroid;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.Button;
 
 import org.json.JSONException;
 
@@ -25,6 +32,9 @@ public class QuizApp extends android.app.Application implements TopicRepository 
     Topic MarvelSuperHeroes;
     Topic ScienceFiction;
     List<Topic> TopicList = new ArrayList<Topic>();
+    AlarmManager alarm;
+    PendingIntent pintent;
+    Intent intent;
 
     private static QuizApp instance = null;
     public QuizApp() {
@@ -39,6 +49,20 @@ public class QuizApp extends android.app.Application implements TopicRepository 
         String json = null;
         super.onCreate();
         Log.i("Application", "application object called");
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String url = SP.getString("URL", "http://tednewardsandbox.site44.com/questions.json");
+        int minutes = Integer.parseInt(SP.getString("Minute", "10"));
+        Log.i("Application", url + " " + minutes);
+        alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        intent = new Intent();
+        intent.setAction("com.tutorialspoint.CUSTOM_INTENT");
+
+        intent.putExtra("message", url);
+        pintent = PendingIntent.getBroadcast(QuizApp.this, 0, intent, 0);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000 * minutes, pintent);
+        //alarm.cancel(pintent);
+
+
         try {
             String result = null;
             InputStream inputStream = getAssets().open("questions.json");
@@ -99,6 +123,7 @@ public class QuizApp extends android.app.Application implements TopicRepository 
         this.ScienceFiction = data.ScienceFiction;
         this.TopicList = data.TopicsList;
     }
+
 
 
 }

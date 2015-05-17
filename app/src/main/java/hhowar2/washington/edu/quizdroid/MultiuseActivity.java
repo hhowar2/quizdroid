@@ -1,6 +1,8 @@
 package hhowar2.washington.edu.quizdroid;
 
+import android.app.AlarmManager;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -121,5 +123,13 @@ AnswerFragment.OnFragmentInteractionListener {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        QuizApp app = (QuizApp)getApplication();
+        AlarmManager alarm = app.alarm;
+        PendingIntent pintent = app.pintent;
+        alarm.cancel(pintent);
     }
 }
