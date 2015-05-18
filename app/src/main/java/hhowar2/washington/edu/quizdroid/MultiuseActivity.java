@@ -126,7 +126,9 @@ AnswerFragment.OnFragmentInteractionListener {
     }
 
     @Override
-    public void onDestroy() {
+    public void onPause() {
+        super.onPause();
+
         QuizApp app = (QuizApp)getApplication();
         AlarmManager alarm = app.alarm;
         PendingIntent pintent = app.pintent;

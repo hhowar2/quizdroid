@@ -59,7 +59,7 @@ public class QuizApp extends android.app.Application implements TopicRepository 
 
         intent.putExtra("message", url);
         pintent = PendingIntent.getBroadcast(QuizApp.this, 0, intent, 0);
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000 * minutes, pintent);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000, pintent);
         //alarm.cancel(pintent);
 
 
