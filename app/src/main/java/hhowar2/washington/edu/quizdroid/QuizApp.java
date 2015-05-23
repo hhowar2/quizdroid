@@ -9,10 +9,14 @@ import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +39,7 @@ public class QuizApp extends android.app.Application implements TopicRepository 
     AlarmManager alarm;
     PendingIntent pintent;
     Intent intent;
+    List<Topic> Update = new ArrayList<Topic>();
 
     private static QuizApp instance = null;
     public QuizApp() {
@@ -82,6 +87,7 @@ public class QuizApp extends android.app.Application implements TopicRepository 
 
             //String title = readerJSON.getString("title");
             Log.i("Application", readerJSON.length() + "something");
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
             //In the object
             for(int i = 0; i < readerJSON.length(); i++) {
                 JSONObject topic = readerJSON.getJSONObject(i);
@@ -111,6 +117,7 @@ public class QuizApp extends android.app.Application implements TopicRepository 
 
             }
 
+
         } catch(IOException e) {
             e.printStackTrace();
         } catch(JSONException e) {
@@ -126,6 +133,62 @@ public class QuizApp extends android.app.Application implements TopicRepository 
         this.Physics = data.Physics;
         this.ScienceFiction = data.ScienceFiction;
         this.TopicList = data.TopicsList;
+    }
+
+    public void writeFile(FileReader file) {
+        try {
+            String result = null;
+            //InputStream inputStream = getAssets().open("questions.json");
+            BufferedReader reader = new BufferedReader(file);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            result = sb.toString();
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+
+            Log.i("Application", result);
+            JSONArray readerJSON = new JSONArray(result);
+
+            //String title = readerJSON.getString("title");
+            Log.i("Application", readerJSON.length() + "something");
+            //In the object
+
+            for(int i = 0; i < readerJSON.length(); i++) {
+                JSONObject topic = readerJSON.getJSONObject(i);
+                String title = topic.getString("title");
+                String description = topic.getString("desc");
+                Log.i("Application", title + " " + description);
+                JSONArray questions = topic.getJSONArray("questions");
+                List<Question> questionList = new ArrayList<Question>();
+                //Iterating through questions
+                for(int j = 0; j < questions.length(); j++) {
+                    JSONObject question = questions.getJSONObject(j);
+                    String text = question.getString("text");
+                    int position = Integer.parseInt(question.getString("answer"));
+                    JSONArray answers = question.getJSONArray("answers");
+                    String[] answerList = new String[answers.length()];
+                    //iterating through answers
+                    for(int k = 0; k < answers.length(); k++) {
+                        answerList[k] = answers.getString(k);
+                        Log.i("Application", answers.getString(k) + " " + k);
+                    }
+                    Question q = new Question(text, answerList, (position - 1));
+                    questionList.add(q);
+                    Log.i("Application", text + " " + position + " " + answerList.toString());
+                }
+                //if(title.equals(""))
+                Update.add(new Topic(title, questionList, description, ""));
+
+            }
+
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 

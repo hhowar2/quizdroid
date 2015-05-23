@@ -1,5 +1,6 @@
 package hhowar2.washington.edu.quizdroid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,10 +21,12 @@ import java.util.List;
 public class TopicSelection extends ActionBarActivity {
 
     ListView listView;
+    public static TopicSelection activity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_selection);
 
@@ -80,4 +83,17 @@ public class TopicSelection extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /*public void refresh() {
+        this.finish();
+        super.onCreate(null);
+    }*/
+
+    /*@Override
+    public void onResume() {
+        super.onResume();
+        this.finish();
+        super.onCreate(null);
+    }*/
+
 }
