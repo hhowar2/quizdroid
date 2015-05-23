@@ -126,8 +126,8 @@ AnswerFragment.OnFragmentInteractionListener {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
 
         QuizApp app = (QuizApp)getApplication();
         AlarmManager alarm = app.alarm;

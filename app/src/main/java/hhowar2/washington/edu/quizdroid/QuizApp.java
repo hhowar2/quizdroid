@@ -56,8 +56,12 @@ public class QuizApp extends android.app.Application implements TopicRepository 
         alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         intent = new Intent();
         intent.setAction("com.tutorialspoint.CUSTOM_INTENT");
+        Intent testintent = new Intent(this, DownloadService.class);
+        Log.i("Download", "called service");
+        startService(testintent);
 
         intent.putExtra("message", url);
+        //intent.putExtra("interval", minutes);
         pintent = PendingIntent.getBroadcast(QuizApp.this, 0, intent, 0);
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000, pintent);
         //alarm.cancel(pintent);
